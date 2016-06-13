@@ -1,15 +1,17 @@
 package net.imadness.abe.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Сущность, описывающая запись, содержащуюся на доске
+ */
 @Entity
-public class Entry {
+public class Entry implements Serializable {
     @Id
+    @Column(name = "entry_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
@@ -19,13 +21,17 @@ public class Entry {
     @NotNull
     private Date date;
 
-    public Entry() {
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
 
+    public Entry() {
     }
 
-    public Entry(String content, Date date) {
+    public Entry(String content, Date date, Board board) {
         this.content = content;
         this.date = date;
+        this.board = board;
     }
 
     public long getId() {
@@ -58,6 +64,7 @@ public class Entry {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", date=" + date +
+                ", board=" + board +
                 '}';
     }
 }

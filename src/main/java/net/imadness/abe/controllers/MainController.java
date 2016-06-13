@@ -1,26 +1,27 @@
 package net.imadness.abe.controllers;
 
+import net.imadness.abe.dal.BoardRepository;
+import net.imadness.abe.dal.EntryRepository;
+import net.imadness.abe.models.Board;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
 
-    //@Autowired
-    //private EntryRepository entryRepo;
+    @Autowired
+    private EntryRepository entryRepository;
+
+    @Autowired
+    private BoardRepository boardRepository;
 
     @RequestMapping("/")
-    @ResponseBody
-    public String index() {
-        return "jello";
-        /*try {
-            Object nya = entryRepo.save(new Entry("Boo", new Date()));
-            return nya.toString();
-        } catch (Exception e) {
-            return e.getMessage();
-        }*/
+    public String index(ModelMap modelMap) {
+        Board board = boardRepository.findOne(2l);
+        modelMap.addAttribute("board", board);
+        return "index";
     }
-
 
 }
