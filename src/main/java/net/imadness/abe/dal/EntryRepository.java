@@ -1,10 +1,11 @@
 package net.imadness.abe.dal;
 
 import net.imadness.abe.models.Entry;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import javax.transaction.Transactional;
-
-@Transactional
-public interface EntryRepository extends JpaRepository<Entry, Long> {
+/**
+ * DAO-репозиторий, содержащий базовые CRUD-операции для записей {@code Entry}.
+ * @see PagingAndSortingRepository
+ */
+public interface EntryRepository extends PagingAndSortingRepository<Entry, Long> {
 }

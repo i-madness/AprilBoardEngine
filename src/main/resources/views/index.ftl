@@ -2,8 +2,7 @@
 
 <!-- The drawer is always open in large screens. The header is always shown,
   even in small screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-            mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <span class="mdl-layout-title">
@@ -23,11 +22,24 @@
             </div>
         </div>
     </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Boards</span>
+    <div class="">
+        <span class="mdl-layout-title">
+        Boards
+        </span>
+
+        <button id="demo-menu-lower-left"
+                class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-left">
+            <li class="mdl-menu__item">Some Action</li>
+            <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
+            <li disabled class="mdl-menu__item">Disabled Action</li>
+            <li class="mdl-menu__item">Yet Another Action</li>
+        </ul>
         <nav class="mdl-navigation">
         <#list boards as board>
-            <a class="mdl-navigation__link" href="">${board.name}</a>
+            <a class="mdl-navigation__link" href="">${board.content}</a>
         </#list>
         </nav>
     </div>
