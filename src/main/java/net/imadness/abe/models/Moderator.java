@@ -1,32 +1,28 @@
 package net.imadness.abe.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Сущность, соответствующая доске с записями
+ * Сущность, описывающая аккаунт администратора
  */
 @Entity
-public class Board implements Serializable {
+public class Moderator implements Serializable {
     @Id
-    @Column(name = "board_id")
+    @Column(name = "admin_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<Entry> entries = new ArrayList<>();
+    private String password;
 
-    public Board() {
+    public Moderator() {
     }
 
-    public Board(String name) {
+    public Moderator(String name, String password) {
         this.name = name;
+        this.password = password;
     }
 
     public Long getId() {
@@ -45,20 +41,20 @@ public class Board implements Serializable {
         this.name = name;
     }
 
-    public List<Entry> getEntries() {
-        return entries;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEntries(List<Entry> entries) {
-        this.entries = entries;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "Board{" +
+        return "Moderator{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", entries=" + entries +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

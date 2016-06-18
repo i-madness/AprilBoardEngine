@@ -13,7 +13,7 @@ public class Entry implements Serializable {
     @Id
     @Column(name = "entry_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     private String content;
@@ -34,11 +34,11 @@ public class Entry implements Serializable {
         this.board = board;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

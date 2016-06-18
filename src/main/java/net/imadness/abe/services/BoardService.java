@@ -40,11 +40,11 @@ public class BoardService {
 
     /**
      * Добавляет новую доску в БД
-     *
-     * @param board объект новой доски
+     * @param board объект доски для сохранения
+     * @return сохраняемый объект
      */
-    public void insertBoard(Board board) {
-        boardRepository.save(board);
+    public Board insertBoard(Board board) {
+        return boardRepository.save(board);
     }
 
     /**
@@ -53,10 +53,10 @@ public class BoardService {
      * @param board экземпляр доски с новыми данными
      * @param id    id доски, которую нужно обновить
      */
-    public void updateBoard(Board board, Long id) {
+    public Board updateBoard(Board board, Long id) {
         Board dbBoard = boardRepository.getOne(id);
         dbBoard.setName(board.getName());
-        boardRepository.save(dbBoard);
+        return boardRepository.save(dbBoard);
     }
 
     /**

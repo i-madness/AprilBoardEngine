@@ -48,9 +48,10 @@ public class EntryService {
      * Сохраняет объект записи в БД
      *
      * @param entry запись для сохранения
+     * @return сохраненный объект
      */
-    public void insertEntry(Entry entry) {
-        entryRepository.save(entry);
+    public Entry insertEntry(Entry entry) {
+        return entryRepository.save(entry);
     }
 
     /**
@@ -58,12 +59,13 @@ public class EntryService {
      *
      * @param entry экземпляр записи с новыми данными
      * @param id    id записи, которую нужно обновить
+     * @return сохраненный объект
      */
-    public void updateEntry(Entry entry, Long id) {
+    public Entry updateEntry(Entry entry, Long id) {
         Entry dbEntry = entryRepository.findOne(id);
         dbEntry.setContent(entry.getContent());
         dbEntry.setDate(entry.getDate());
-        entryRepository.save(dbEntry);
+        return entryRepository.save(dbEntry);
     }
 
     /**
