@@ -20,9 +20,6 @@ public class EntryService {
     @Autowired
     private EntryRepository entryRepository;
 
-    // TODO: написать сущность / репозиторий / сервис для аккаунта Админа
-    //place for @Autowired private AdminRepository adminRepository
-
     /**
      * Возвращает определённую страницу из {@link Entry}
      *

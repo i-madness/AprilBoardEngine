@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Сущность, описывающая аккаунт администратора
+ * Сущность, описывающая аккаунт модератора форума
  */
 @Entity
 public class Moderator implements Serializable {
