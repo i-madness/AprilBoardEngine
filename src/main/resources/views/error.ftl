@@ -1,20 +1,37 @@
 <#include "head.ftl">
 
 <style>
+    html, body {
+        max-height: 100%;
+    }
+    .mdl-card {
+        margin-top: 5%;
+        background-color: #009688;
+    }
     .demo-card-wide > .mdl-card__title {
         top: 10%;
         color: #fff;
         height: 132px;
         background: url('/static/img/error-page-pic.gif') repeat-x;
     }
-    .demo-card-wide > .mdl-card__title-text {
+    .mdl-card__title > h2 {
+        font-weight: 500;
+    }
+    .mdl-layout-title {
+        /*background-color: #009688;*/
         color: #fff;
+        margin: 7px;
+    }
+    .mdl-card__supporting-text, .mdl-card__actions {
+        width: 100%;
+        background-color: #fff;
     }
 </style>
 </head>
 
 <body>
 <div class="mdl-cell--10-col mdl-cell--1-offset demo-card-wide mdl-card mdl-shadow--2dp">
+    <span class="mdl-layout-title">April Board Engine</span>
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">${errorName}</h2>
     </div>
