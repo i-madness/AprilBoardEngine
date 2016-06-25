@@ -1,4 +1,5 @@
 $(function() {
+"use strict";
     var username = localStorage.getItem("username");
     if (username) {
         $('.username-field').html(username);
