@@ -11,3 +11,18 @@
 .username-field {
     color: #ffffff;
 }
+
+.username-post {
+    color: #000000;
+}
+.username-post:hover {
+    font-weight: 300;
+}
+
+.mdl-textfield {
+    width: 100%;
+}
+
+#new-entry-form {
+    color: #000000;
+}

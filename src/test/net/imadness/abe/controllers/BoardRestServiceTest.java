@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Содержит
+ * Содержит тесты, проверяющие работу контроллера {@link BoardRestService}
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(MockServletContext.class)
@@ -64,7 +64,7 @@ public class BoardRestServiceTest {
 
     /**
      * Проверяет корректность ответа сервера на запрос определённой страницы форума
-     * @see net.imadness.abe.controllers.BoardRestService#getBoardPage(Long, Integer)
+     * @see BoardRestService#getBoardPage(Long, Integer)
      */
     @Test
     public void testGetBoardPage() throws Exception {
