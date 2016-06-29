@@ -1,6 +1,8 @@
 package net.imadness.abe.services;
 
+import net.imadness.abe.dal.BoardRepository;
 import net.imadness.abe.dal.EntryRepository;
+import net.imadness.abe.models.Board;
 import net.imadness.abe.models.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,15 +22,19 @@ public class EntryService {
     @Autowired
     private EntryRepository entryRepository;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
     /**
      * Возвращает определённую страницу из {@link Entry}
      *
      * @param pageNumber номер страницы
      * @return страница с записями
      */
-    public Page<Entry> getEntries(Integer pageNumber) {
+    public Page<Entry> getEntries(Long boardId, Integer pageNumber) {
         Pageable pageable = createPageRequest(pageNumber);
-        return entryRepository.findAll(pageable);
+        Board board = boardRepository.findOne(boardId);
+        return entryRepository.findByBoard(board, pageable);
     }
 
     /**
