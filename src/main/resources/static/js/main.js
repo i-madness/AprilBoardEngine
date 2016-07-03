@@ -34,4 +34,11 @@ $(function() {
             }
         })
     });
+
+    $('#send-entry').click(function () {
+        var newEntry = {
+            //authorId : 
+            
+        }
+    });
 });

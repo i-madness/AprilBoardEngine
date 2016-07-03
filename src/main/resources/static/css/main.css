@@ -13,6 +13,14 @@
     width: 100%;
 }
 
-#new-entry-form {
-    color: #000000;
+#new-entry{
+    margin-top: 6px !important;
+    color: #000;
+}
+.board-entry {
+    color: #000 !important;
+    margin-bottom: 6px !important;
+}
+.entry-author {
+    font-weight: 300;
 }

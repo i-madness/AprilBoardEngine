@@ -60,7 +60,7 @@
     </div>
     <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid">
-            <div class="demo-cards mdl-cell mdl-cell--12-col mdl-grid mdl-grid--no-spacing">
+            <div id="new-entry" class="demo-cards mdl-cell mdl-cell--12-col mdl-grid mdl-grid--no-spacing">
                 <#--<div class="demo-separator mdl-cell--8-col"></div>-->
                 <div class="demo-options mdl-card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
@@ -71,7 +71,7 @@
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <div class="mdl-layout-spacer"></div>
-                        <a href="#" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green-700 mdl-color-text--white">Отправить</a>
+                        <a href="#" id="send-entry" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green-700 mdl-color-text--white">Отправить</a>
                     </div>
                 </div>
             </div>
