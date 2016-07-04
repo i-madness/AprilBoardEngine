@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class EntryDto {
     private String content;
+    private String author;
     private Long date;
     private Long authorId;
     private Long boardId;

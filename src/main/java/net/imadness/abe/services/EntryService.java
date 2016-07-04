@@ -1,11 +1,7 @@
 package net.imadness.abe.services;
 
-import net.imadness.abe.dal.AuthorRepository;
-import net.imadness.abe.dal.BoardRepository;
 import net.imadness.abe.dal.EntryRepository;
-import net.imadness.abe.models.Board;
 import net.imadness.abe.models.Entry;
-import net.imadness.abe.models.dto.EntryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,22 +20,15 @@ public class EntryService {
     @Autowired
     private EntryRepository entryRepository;
 
-    @Autowired
-    private BoardRepository boardRepository;
-
-    @Autowired
-    private AuthorRepository authorRepository;
-
     /**
      * Возвращает определённую страницу из {@link Entry}
      *
      * @param pageNumber номер страницы
      * @return страница с записями
      */
-    public Page<Entry> getEntries(Long boardId, Integer pageNumber) {
+    public Page<Entry> getEntries(Integer pageNumber) {
         Pageable pageable = createPageRequest(pageNumber);
-        Board board = boardRepository.findOne(boardId);
-        return entryRepository.findByBoard(board, pageable);
+        return entryRepository.findAll(pageable);
     }
 
     /**
@@ -56,21 +45,9 @@ public class EntryService {
      * Сохраняет объект записи в БД
      *
      * @param entry запись для сохранения
-     * @return сохранённый объект
+     * @return сохраненный объект
      */
     public Entry insertEntry(Entry entry) {
-        return entryRepository.save(entry);
-    }
-
-    /**
-     * Сохраняет объект записи в БД на основе её data transfer object
-     * @param entryDto DTO-объект записи
-     * @return сохранённый объект
-     */
-    public Entry insertEntry(EntryDto entryDto) {
-        Entry entry = entryDto.createEntry();
-        entry.setBoard(boardRepository.findOne(entryDto.getBoardId()));
-        entry.setAuthor(authorRepository.findOne(entryDto.getAuthorId()));
         return entryRepository.save(entry);
     }
 
