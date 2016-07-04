@@ -62,4 +62,48 @@ public class EntryDto {
     public void setBoardId(Long boardId) {
         this.boardId = boardId;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "EntryDto{" +
+                "content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                ", date=" + date +
+                ", authorId=" + authorId +
+                ", boardId=" + boardId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntryDto)) return false;
+
+        EntryDto entryDto = (EntryDto) o;
+
+        if (content != null ? !content.equals(entryDto.content) : entryDto.content != null) return false;
+        if (author != null ? !author.equals(entryDto.author) : entryDto.author != null) return false;
+        if (date != null ? !date.equals(entryDto.date) : entryDto.date != null) return false;
+        if (authorId != null ? !authorId.equals(entryDto.authorId) : entryDto.authorId != null) return false;
+        return boardId != null ? boardId.equals(entryDto.boardId) : entryDto.boardId == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = content != null ? content.hashCode() : 0;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
+        result = 31 * result + (boardId != null ? boardId.hashCode() : 0);
+        return result;
+    }
 }

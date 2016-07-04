@@ -33,6 +33,5 @@ public class RestResponseWrapper<T> {
   public void setErrorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
   }
-
   
 }

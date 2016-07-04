@@ -3,8 +3,8 @@
  */
 var RestClient = (function ($) {
     return {
-        postNewEntry : function (entry, callback) {
-            return $.post('/postNew', entry,callback);
+        postNewEntry : function (boardId, entry, callback) {
+            return $.post('/' + boardId + '/postNew', entry,callback);
         }
     }
 }(jQuery));

@@ -26,7 +26,7 @@ public class EntryService {
      * @param pageNumber номер страницы
      * @return страница с записями
      */
-    public Page<Entry> getEntries(Integer pageNumber) {
+    public Page<Entry> getEntries(Long boardId, Integer pageNumber) {
         Pageable pageable = createPageRequest(pageNumber);
         return entryRepository.findAll(pageable);
     }

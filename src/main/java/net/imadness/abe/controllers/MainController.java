@@ -1,7 +1,7 @@
 package net.imadness.abe.controllers;
 
-import net.imadness.abe.dal.BoardRepository;
-import net.imadness.abe.models.Entry;
+import net.imadness.abe.models.Board;
+import net.imadness.abe.services.BoardService;
 import net.imadness.abe.services.EntryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class MainController {
     private EntryService entryService;
 
     @Autowired
-    private BoardRepository boardRepository;
+    private BoardService boardService;
 
     private static final String APPLICATION_NAME = "April Board Engine";
 
@@ -35,11 +35,11 @@ public class MainController {
     @RequestMapping("/")
     public String index(ModelMap modelMap) {
         try {
-            List<Entry> boards = entryService.getEntries(0).getContent();
+            List<Board> boards = boardService.getAllBoards();
             modelMap.addAttribute("appName", APPLICATION_NAME);
             modelMap.addAttribute("boards", boards);
         } catch (Exception e) {
-            LOGGER.warn("Ошибка при загрузке списка форумов на главную страницу");
+            LOGGER.trace("Ошибка при загрузке списка форумов на главную страницу", e);
             modelMap.addAttribute("errorName", "Ошибка при подготовке главной страницы!");
             modelMap.addAttribute("errorMessage", "Произошла ошибка при загрузке списка форумов на главную страницу.<br>" + e.getMessage());
             return "error";
