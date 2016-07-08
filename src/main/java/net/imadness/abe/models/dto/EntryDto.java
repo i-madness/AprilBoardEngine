@@ -2,13 +2,16 @@ package net.imadness.abe.models.dto;
 
 import net.imadness.abe.models.Entry;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Data Transfer Object для сущности Entry
  */
 public class EntryDto {
+    @NotNull
     private String content;
+    @NotNull
     private String author;
     private Long date;
     private Long authorId;
@@ -72,17 +75,6 @@ public class EntryDto {
     }
 
     @Override
-    public String toString() {
-        return "EntryDto{" +
-                "content='" + content + '\'' +
-                ", author='" + author + '\'' +
-                ", date=" + date +
-                ", authorId=" + authorId +
-                ", boardId=" + boardId +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof EntryDto)) return false;
@@ -105,5 +97,16 @@ public class EntryDto {
         result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
         result = 31 * result + (boardId != null ? boardId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "EntryDto{" +
+                "content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                ", date=" + date +
+                ", authorId=" + authorId +
+                ", boardId=" + boardId +
+                '}';
     }
 }

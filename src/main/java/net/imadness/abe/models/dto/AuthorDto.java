@@ -2,12 +2,15 @@ package net.imadness.abe.models.dto;
 
 import net.imadness.abe.models.Author;
 
+import javax.validation.constraints.NotNull;
+
 // TODO определиться уже с конструкторами
 public class AuthorDto {
     // здесь не совсем понятно, что именно мы хотим здесь видеть
     // на уровне сервиса можно искать авторов по id или же по nickname (у второго очевидный минус)
     // с другой стороны получается, что особо смысла в этом dto и нету
     private Long id;
+    @NotNull
     private String nickname;
     
     public AuthorDto() {
@@ -84,5 +87,13 @@ public class AuthorDto {
       } else if (!nickname.equals(other.nickname))
         return false;
       return true;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthorDto{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                '}';
     }
 }
