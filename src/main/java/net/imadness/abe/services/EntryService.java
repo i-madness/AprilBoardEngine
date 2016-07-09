@@ -1,7 +1,11 @@
 package net.imadness.abe.services;
 
+import net.imadness.abe.dal.AuthorRepository;
+import net.imadness.abe.dal.BoardRepository;
 import net.imadness.abe.dal.EntryRepository;
+import net.imadness.abe.models.Board;
 import net.imadness.abe.models.Entry;
+import net.imadness.abe.models.dto.EntryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +23,12 @@ public class EntryService {
 
     @Autowired
     private EntryRepository entryRepository;
+
+    @Autowired
+    private BoardRepository boardRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     /**
      * Возвращает определённую страницу из {@link Entry}
@@ -47,8 +57,13 @@ public class EntryService {
      * @param entry запись для сохранения
      * @return сохраненный объект
      */
-    public Entry insertEntry(Entry entry) {
-        return entryRepository.save(entry);
+    public Entry insertEntry(EntryDto entry) {
+        // TODO: автора передаём уже нормальным объектом из контроллера, т.к. там решается, как мы его достаём из БД
+        //Author author = authorRepository.findOne(entry.getAuthorId());
+        Board board = boardRepository.findOne(entry.getBoardId());
+        Entry result = entry.createEntry();
+        result.setBoard(board);
+        return entryRepository.save(result);
     }
 
     /**

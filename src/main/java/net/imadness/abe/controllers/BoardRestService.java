@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -48,19 +45,23 @@ public class BoardRestService {
             LOGGER.info("Отдаём клиенту {} страницу доски #{}", page, id);
             return new ResponseEntity<>(new RestResponseWrapper<>(pageEntries), HttpStatus.OK);
         } catch (Exception e) {
-            LOGGER.warn("Ошибка при получении {} страницы доски #{}", page, id);
+            LOGGER.warn("Ошибка при получении {} страницы доски #{}", page, id, e);
             return new ResponseEntity<>(new RestResponseWrapper<>(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping("/{id}/postNew")
-    public ResponseEntity<String> postNewEntry(@RequestParam EntryDto entry, @PathVariable Long id, HttpServletRequest request) {
+    @RequestMapping(value = "/postNew", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<String> postNewEntry(@RequestBody EntryDto entry, HttpServletRequest request) {
         try {
-            entryService.insertEntry(entry.createEntry());
-            LOGGER.info("Запись {} добавлена на доску #{}", entry, id);
+            // TODO \ сделать обработку информации об авторе:
+            // todo \ nickname нет в базе и поиск по IP ничего не дал - записываем нового автора
+            // todo \ nickname не нашли, но IP есть - обновляем автора
+            // todo \ IP нет, но nickname есть - обновляем автора ===> не дать возможность занимать имеющиеся никнеймы
+            entryService.insertEntry(entry);
+            LOGGER.info("Запись {} добавлена на доску #{}", entry, entry.getBoardId());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            LOGGER.info("Ошибка при добавлении записи {} базу данных", entry);
+            LOGGER.info("Ошибка при добавлении записи {} базу данных", entry, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

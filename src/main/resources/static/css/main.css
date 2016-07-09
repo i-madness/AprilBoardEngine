@@ -15,8 +15,11 @@
 
 #new-entry{
     margin-top: 6px !important;
+}
+#new-entry-form {
     color: #000;
 }
+
 .board-entry {
     color: #000 !important;
     margin-bottom: 6px !important;

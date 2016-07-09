@@ -37,9 +37,14 @@ $(function () {
     $('#send-entry').click(function () {
         var newEntry = {
             authorId: localStorage.getItem("aId"),
-            boardId : 2,
-            content : "beep",
-            date : moment().unix(),
+            author: localStorage.getItem("username"),
+            boardId: 2,
+            content: $('#new-entry-form').val(),
+            date: moment().unix()
         }
+        var successCallback = function () {
+            console.debug('YEAAH');
+        }
+        RestClient.postNewEntry(newEntry, successCallback)
     });
 })
