@@ -2,16 +2,14 @@ package net.imadness.abe.models.dto;
 
 import net.imadness.abe.models.Author;
 
-import javax.validation.constraints.NotNull;
-
 // TODO определиться уже с конструкторами
 public class AuthorDto {
     // здесь не совсем понятно, что именно мы хотим здесь видеть
     // на уровне сервиса можно искать авторов по id или же по nickname (у второго очевидный минус)
     // с другой стороны получается, что особо смысла в этом dto и нету
     private Long id;
-    @NotNull
     private String nickname;
+    private String ipAddress;
     
     public AuthorDto() {
     }
@@ -21,9 +19,10 @@ public class AuthorDto {
      * @param id
      * @param nickname
      */
-    public AuthorDto(Long id, String nickname) {
+    public AuthorDto(Long id, String nickname, String ipAddress) {
         this.id = id;
         this.nickname = nickname;
+        this.ipAddress = ipAddress;
     }
     
     /**
@@ -34,6 +33,7 @@ public class AuthorDto {
         Author result = new Author();
         result.setId(this.id);
         result.setNickname(this.nickname);
+        result.setIpAddress(this.ipAddress);
         return result;
     }
     
@@ -58,35 +58,33 @@ public class AuthorDto {
         this.nickname = nickname;
     }
 
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((id == null) ? 0 : id.hashCode());
-      result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
-      return result;
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
     @Override
-    public boolean equals(Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      AuthorDto other = (AuthorDto) obj;
-      if (id == null) {
-        if (other.id != null)
-          return false;
-      } else if (!id.equals(other.id))
-        return false;
-      if (nickname == null) {
-        if (other.nickname != null)
-          return false;
-      } else if (!nickname.equals(other.nickname))
-        return false;
-      return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AuthorDto)) return false;
+
+        AuthorDto authorDto = (AuthorDto) o;
+
+        if (id != null ? !id.equals(authorDto.id) : authorDto.id != null) return false;
+        if (nickname != null ? !nickname.equals(authorDto.nickname) : authorDto.nickname != null) return false;
+        return ipAddress != null ? ipAddress.equals(authorDto.ipAddress) : authorDto.ipAddress == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        result = 31 * result + (ipAddress != null ? ipAddress.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -94,6 +92,7 @@ public class AuthorDto {
         return "AuthorDto{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
                 '}';
     }
 }
