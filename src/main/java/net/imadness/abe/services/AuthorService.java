@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * TODO: implement this
+ * Содержит CRUD-методы на основе использования AuthorRepository
+ * TODO дописать доменный объект автора (isBanned) и оставшуюся логику для реализации бана пользователей
  */
 @Service
 @Transactional
@@ -20,24 +21,42 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     /**
+     * Возвращает всех авторов и сортирует их по никнейму в алфавитном порядке
      *
-     * @return
+     * @return отсортированный список из авотров
      */
     public List<Author> getAllAuthors() {
-        return authorRepository.findAll(new Sort(Sort.Direction.ASC));
+        return authorRepository.findAll(new Sort(Sort.Direction.ASC, "nickname"));
     }
 
+    /**
+     * Возвращает автора с определённым id
+     *
+     * @param id id автора
+     * @return объект автора
+     */
     public Author getAuthorById(Long id) {
         return authorRepository.findOne(id);
     }
 
     /**
+     * Находит автора в базе данных по его IP-адресу
      *
      * @param ipAddress
-     * @return
+     * @return объект автора
      */
     public Author getAuthorByIpAddress(String ipAddress) {
         return authorRepository.findByIpAddress(ipAddress);
+    }
+
+    /**
+     * Добавляет в базу данных новую запись об авторе и возвращает добавленный объект
+     *
+     * @param authorDto сохраняемые данные в формате dto
+     * @return объект автора
+     */
+    public Author insertAuthor(AuthorDto authorDto) {
+        return authorRepository.saveAndFlush(authorDto.createAuthor());
     }
 
     /**
@@ -52,4 +71,14 @@ public class AuthorService {
         dbAuthor.setNickname(authorDto.getNickname());
         return authorRepository.saveAndFlush(dbAuthor);
     }
+
+    /**
+     * Удаляет автора с указанным id из базы данных
+     *
+     * @param id id автора
+     */
+    public void deleteAuthorById(Long id) {
+        authorRepository.delete(id);
+    }
+
 }

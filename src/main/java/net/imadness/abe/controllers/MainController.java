@@ -1,6 +1,7 @@
 package net.imadness.abe.controllers;
 
 import net.imadness.abe.models.Board;
+import net.imadness.abe.services.AuthorService;
 import net.imadness.abe.services.BoardService;
 import net.imadness.abe.services.EntryService;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,6 +27,9 @@ public class MainController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private AuthorService authorService;
+
     private static final String APPLICATION_NAME = "April Board Engine";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
@@ -33,7 +38,7 @@ public class MainController {
      * Подготавливает представление главной страницы
      */
     @RequestMapping("/")
-    public String index(ModelMap modelMap) {
+    public String index(ModelMap modelMap, @CookieValue String aId) {
         try {
             List<Board> boards = boardService.getAllBoards();
             modelMap.addAttribute("appName", APPLICATION_NAME);
