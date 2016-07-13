@@ -9,14 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
+ * REST-сервис, обслуживающий запросы, связанные с модификацией объектов типа {@code Author}
  */
 @RestController
 public class AuthorRestService {
@@ -34,7 +34,7 @@ public class AuthorRestService {
      * @param request объект пользовательского запроса
      * @return объект ответа сервера с указанием статуса
      */
-    public ResponseEntity<String> processUsernameRequest(@RequestParam String nickname, HttpServletRequest request) {
+    public ResponseEntity<String> processUsernameRequest(@RequestParam String nickname, @CookieValue("aId") String authorId, HttpServletRequest request) {
         try {
             AuthorDto authorDto = new AuthorDto();
             authorDto.setNickname(nickname);
@@ -45,11 +45,7 @@ public class AuthorRestService {
             userInstance = authorService.getAuthorByIpAddress(ipAddress);
             if (userInstance == null) {
                 // попытка найти пользователя по его ID, сохранённому в cookie браузера
-                Long idCookie = null;
-                for (Cookie cookie : request.getCookies()) {
-                    if (cookie.getName().equals("uId"))
-                        idCookie = Long.parseLong(cookie.getValue());
-                }
+                Long idCookie = Long.parseLong(authorId);
                 if (idCookie != null)
                     authorService.updateAuthor(authorDto);
                 return new ResponseEntity<>(HttpStatus.OK);

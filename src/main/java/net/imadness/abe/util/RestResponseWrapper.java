@@ -1,5 +1,11 @@
 package net.imadness.abe.util;
 
+/**
+ * Класс-обёртка над объектом, который необходимо передать клиенту в качестве ответа сервера (json).
+ * Помимо самого объекта инкапсулирует строку с сообщением об ошибке {@link Throwable#getMessage()}
+ *
+ * @param <T> тип инкапсулируемого объекта
+ */
 public class RestResponseWrapper<T> {
   
   private T data;

@@ -2,11 +2,7 @@ package net.imadness.abe.models.dto;
 
 import net.imadness.abe.models.Author;
 
-// TODO определиться уже с конструкторами
 public class AuthorDto {
-    // здесь не совсем понятно, что именно мы хотим здесь видеть
-    // на уровне сервиса можно искать авторов по id или же по nickname (у второго очевидный минус)
-    // с другой стороны получается, что особо смысла в этом dto и нету
     private Long id;
     private String nickname;
     private String ipAddress;
