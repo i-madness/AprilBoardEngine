@@ -50,6 +50,13 @@ public class BoardRestService {
         }
     }
 
+    /**
+     * Сохраняет в базе данных запись {@code Entry}, содержащуюся в теле клиентского запроса
+     *
+     * @param entry   DTO-представление записи
+     * @param request объект запроса клиента
+     * @return объект ответа сервера
+     */
     @RequestMapping(value = "/postNew", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> postNewEntry(@RequestBody EntryDto entry, HttpServletRequest request) {
         try {

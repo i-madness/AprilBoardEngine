@@ -27,7 +27,7 @@ public class IpAddressUtil {
      * В противном случае возвращает IP-адрес с помощью "стандартного" метода {@code HttpServletRequest}
      *
      * @param request
-     * @return
+     * @return строка, содержащая IP-адрес клиента
      */
     public static String getClientIpAddress(HttpServletRequest request) {
         for (String header : HEADERS_TO_TRY) {

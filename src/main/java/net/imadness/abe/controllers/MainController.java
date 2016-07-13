@@ -1,5 +1,6 @@
 package net.imadness.abe.controllers;
 
+import net.imadness.abe.controllers.exceptions.BoardLoadingException;
 import net.imadness.abe.models.Author;
 import net.imadness.abe.models.Board;
 import net.imadness.abe.models.dto.AuthorDto;
@@ -44,7 +45,7 @@ public class MainController {
      * Подготавливает представление главной страницы
      */
     @RequestMapping("/")
-    public String index(ModelMap modelMap, @CookieValue("aId") String authorId, HttpServletRequest request, HttpServletResponse response) {
+    public String index(ModelMap modelMap, @CookieValue("aId") String authorId, HttpServletRequest request, HttpServletResponse response) throws BoardLoadingException {
         try {
             // Проверка и установка Cookie с ID автора
             if (authorId == null) {
@@ -63,9 +64,7 @@ public class MainController {
             modelMap.addAttribute("boards", boards);
         } catch (Exception e) {
             LOGGER.trace("Ошибка при загрузке списка форумов на главную страницу", e);
-            modelMap.addAttribute("errorName", "Ошибка при подготовке главной страницы!");
-            modelMap.addAttribute("errorMessage", "Произошла ошибка при загрузке списка форумов на главную страницу.<br>" + e.getMessage());
-            return "error";
+            throw new BoardLoadingException(e);
         }
         LOGGER.info("Главная страница подготовлена и загружена");
         return "index";

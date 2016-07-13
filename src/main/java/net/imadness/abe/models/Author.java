@@ -23,6 +23,8 @@ public class Author implements Serializable {
     @NotNull
     private String ipAddress;
 
+    private Boolean isBanned = false;
+
     public Author() {
     }
 
@@ -53,6 +55,14 @@ public class Author implements Serializable {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public Boolean getBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(Boolean banned) {
+        isBanned = banned;
     }
 
     @Override

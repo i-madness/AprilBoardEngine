@@ -33,11 +33,11 @@
 <div class="mdl-cell--10-col mdl-cell--1-offset demo-card-wide mdl-card mdl-shadow--2dp">
     <span class="mdl-layout-title">April Board Engine</span>
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">${errorName}</h2>
+        <h2 class="mdl-card__title-text"><#--${errorName}--></h2>
     </div>
     <div class="mdl-card__supporting-text">
         <p>О ужос! Похоже, что-то пошло не так!</p>
-        <p>${errorMessage}</p>
+        <p><#--${errorMessage}--></p>
     </div>
     <div class="mdl-card__actions mdl-card--border">
         <a onclick="history.back()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
