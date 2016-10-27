@@ -32,7 +32,7 @@ public class BoardRestService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardRestService.class);
 
     /**
-     * Возвращает записии для определённой страницы доски
+     * Возвращает записи для определённой страницы доски
      *
      * @param id   ID выбранной доски
      * @param page номер страницы

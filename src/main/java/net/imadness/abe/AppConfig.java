@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan("project")
+@ComponentScan("net.imadness.abe")
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Override

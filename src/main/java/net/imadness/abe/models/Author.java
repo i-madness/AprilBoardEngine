@@ -26,6 +26,7 @@ public class Author implements Serializable {
     private Boolean isBanned = false;
 
     public Author() {
+        this.nickname = "Anonymous";
     }
 
     public Author(String nickname, String ipAddress) {

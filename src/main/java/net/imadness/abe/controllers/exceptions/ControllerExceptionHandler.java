@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+    /**
+     * Обработка исключения для основного представления
+     * @param exception исключение
+     * @param model коллекция параметров представления
+     * @return адрес страницы ошибки
+     */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(BoardLoadingException.class)
     public String handleMainViewException(Exception exception, ModelMap model) {

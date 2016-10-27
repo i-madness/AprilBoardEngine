@@ -56,9 +56,7 @@ public class BoardRestServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(new BoardRestService(boardService, entryService)).build();
-
         entryPage = new RestResponseWrapper<>(Collections.emptyList());
-
         when(entryService.getEntries(1L,1)).thenReturn(new PageImpl<>(entryPage.getData()));
     }
 

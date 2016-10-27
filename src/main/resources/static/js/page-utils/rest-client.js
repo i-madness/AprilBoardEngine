@@ -2,6 +2,9 @@
  * Утилита для отправки Ajax-запросов на сервер
  */
 var RestClient = (function ($) {
+
+    /*Placeholder for $.ajaxSetup()*/
+
     return {
         /**
          * Отправляет на сервер новую запись форума
