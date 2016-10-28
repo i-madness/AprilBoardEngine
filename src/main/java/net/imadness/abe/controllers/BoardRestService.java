@@ -60,10 +60,6 @@ public class BoardRestService {
     @RequestMapping(value = "/postNew", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> postNewEntry(@RequestBody EntryDto entry, HttpServletRequest request) {
         try {
-            // TODO \ сделать обработку информации об авторе:
-            // todo \ nickname нет в базе и поиск по IP ничего не дал - записываем нового автора
-            // todo \ nickname не нашли, но IP есть - обновляем автора
-            // todo \ IP нет, но nickname есть - обновляем автора ===> не дать возможность занимать имеющиеся никнеймы
             entryService.insertEntry(entry);
             LOGGER.info("Запись {} добавлена на доску #{}", entry, entry.getBoardId());
             return new ResponseEntity<>(HttpStatus.OK);

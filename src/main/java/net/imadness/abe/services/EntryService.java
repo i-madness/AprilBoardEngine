@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * Содержит CRUD-методы на основе использования EntryRepository, учитывающие специфику запроса,
  * приходящего со стороны клиента (использование пагинации).
@@ -62,6 +64,7 @@ public class EntryService {
         //Author author = authorRepository.findOne(entry.getAuthorId());
         Board board = boardRepository.findOne(entry.getBoardId());
         Entry result = entry.createEntry();
+        result.setDate(new Date());
         result.setBoard(board);
         return entryRepository.save(result);
     }

@@ -1,6 +1,6 @@
 package net.imadness.abe.controllers;
 
-import net.imadness.abe.controllers.exceptions.BoardLoadingException;
+import net.imadness.abe.controllers.exceptions.SpringControllerException;
 import net.imadness.abe.models.Board;
 import net.imadness.abe.services.AuthorService;
 import net.imadness.abe.services.BoardService;
@@ -40,14 +40,14 @@ public class MainController {
      * Подготавливает представление главной страницы
      */
     @RequestMapping("/")
-    public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws BoardLoadingException {
+    public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws SpringControllerException {
         try {
             List<Board> boards = boardService.getAllBoards();
             modelMap.addAttribute("appName", APPLICATION_NAME);
             modelMap.addAttribute("boards", boards);
         } catch (Exception e) {
             LOGGER.trace("Ошибка при загрузке списка форумов на главную страницу", e);
-            throw new BoardLoadingException(e);
+            throw new SpringControllerException(e);
         }
         LOGGER.info("Главная страница подготовлена и загружена");
         return "index";

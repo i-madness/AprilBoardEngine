@@ -8,7 +8,7 @@ $(function () {
     $('.username-field').html(userName);
     var username = localStorage.getItem("username");
     if (username) {
-        +$('.username-field').html(username);
+        $('.username-field').html(username);
     }
 
     $('#username-input').change(function () {

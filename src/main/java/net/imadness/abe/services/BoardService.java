@@ -2,6 +2,7 @@ package net.imadness.abe.services;
 
 import net.imadness.abe.dal.BoardRepository;
 import net.imadness.abe.models.Board;
+import net.imadness.abe.models.dto.BoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,15 @@ public class BoardService {
      */
     public Board insertBoard(Board board) {
         return boardRepository.save(board);
+    }
+
+    /**
+     * Добавляет новую доску в БД с использованием DTO
+     * @param boardDto клиентские данные о новой доске
+     * @return сохраняемый объект
+     */
+    public Board insertBoard(BoardDto boardDto) {
+        return boardRepository.save(boardDto.createBoard());
     }
 
     /**
